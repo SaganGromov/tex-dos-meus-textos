@@ -1,0 +1,778 @@
+\input{notation.tex}
+\input{preamble.tex}
+\begin{document}
+
+
+\begin{Mybox}
+Mostre que se $\mm$ é $\R^3$ menos uma reta, então $H^1(\mm)$ não é trivial.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.5cm}
+\begin{dem}
+A menos de difeomorfismo, só há uma maneira de retirar uma reta do $\R^3$, pois as posições dos pontos de duas retas quaisquer diferem apenas por uma rotação e (possivelmente) uma translação não nula, e a composição de uma rotação com uma translação é um difeomorfismo. E como a cohomologia de De Rham é invariante por difeomorfismos, podemos então sem perda de generalidade assumir que a reta retirada é o eixo $z$, ou seja, considerar \[
+\mm = \{(x, y, z) \in \mathbb{R}^3 \ \vert \ x \neq 0 \text{ ou } y \neq 0 \}
+\] Defina a seguinte $1$-forma $\tau$ em $\mm$ 
+\[
+\tau = -\frac{y}{x^2 + y^2 } \cdot \dd x + \frac{x}{x^2 + y^2} \cdot \dd y
+\]
+Um cálculo direto mostra que $\tau$ é fechada. Mas como a integral de $\tau$ sobre o círculo
+\[
+\mathbb{S}^1 = \{(\cos(t), \operatorname{sen}(t), 0) \ \vert \ t \in [0, 2 \pi) \}
+\]
+é igual a
+\[
+\int_{\mathbb{S}^1} \tau = 2 \pi
+\]
+Concluímos que $\tau$ não é exata (caso contrário teríamos pelo teorema de Stokes $2 \pi = 0$, um absurdo). Portanto $0 \neq [\tau] \in H^1(\mm)$, \emph{id est}, $H^1(\mm)$ não é trivial.
+\end{dem}
+
+
+\begin{Mybox}
+Se $\mm$ é $\R^3$ menos um ponto, mostre que $H^3(\mm)$ é trivial sem utilizar argumentos topológicos. Sugestão: tentar adaptar o argumento utilizado acima para o cálculo de $H^2(\R^2 - (0,0))$.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+\begin{dem}
+A menos de difeomorfismo, só há uma maneira de retirar um ponto de $\R^3$ (basta considerar translações). Portanto podemos assumir sem perda de generalidade que o ponto retirado é a origem. Denotaremos por $r: \R^3 \to \R$ a função raio, dada por $r(x, y, z) = \sqrt{x^2 + y^2 + z^2}$ para cada $(x, y, z) \in \mathbb{R}^3$. Considere em $\mm$ a $2$-forma $\tau$ determinada por
+\[
+\tau = \frac{x}{r^3(x, y, z)} \cdot \dd y \wedge \dd z - \frac{y}{r^3(x, y, z)} \cdot \dd x \wg \dd z + \frac{z}{r^3(x, y, z)} \cdot \dd x \wg \dd y
+\]
+para cada $(x, y, z) \in \mm$. Uma vez que
+\begin{align*}
+\dd \tau &= \frac{\partial}{\partial x} \left(\frac{x}{r^3(x, y, z)} \right)  \dd x \wg \dd y \wedge \dd z  + \frac{\partial}{\partial y}  \left(\frac{-y}{r^3(x, y, z)} \right) \dd y \wg \dd x \wedge \dd z  \\
+&+\frac{\partial}{\partial z} \left(\frac{z}{r^3(x, y, z)} \right)   \dd z \wg \dd x \wedge \dd y \\
+&= \frac{-2x^2 + y^2 + z^2}{r^5(x, y, z)} \cdot \dd x \wg \dd y \wedge \dd z + \frac{x^2 -2 y^2 + z^2}{r^5(x, y, z)} \cdot \dd x \wg \dd y \wedge \dd z \\
+&+\frac{x^2 + y^2 - 2 z^2}{r^5(x, y, z)} \cdot \dd x \wg \dd y \wedge \dd z  \\
+&= 0
+\end{align*}
+vemos que $\tau$ é fechada. Seja agora $\w$ uma $3$-forma qualquer em $\mm$. Sem perda de generalidade, podemos assumir que $\w$ satisfaz
+\[
+\w =  \frac{f(x, y, z)}{r^2(x, y, z)} \cdot \dd x \wg \dd y \wg \dd z
+\]
+para alguma $f: \mm \to \R$ suave. Estamos agora em busca de uma $2$-forma $\eta$ em $\mm$ tal que $\w = \dd \eta$. Supondo que $\eta = g \tau$ para alguma $g: \mm \to \R$ suave, vemos que tal condição é equivalente a
+\begin{equation}\label{cond}
+\begin{aligned}
+ \frac{f(x, y, z)}{r^2(x, y, z)} \cdot \dd x \wg \dd y \wg \dd z = \dd \eta = \dd g \wg \tau &= (g_x \dd x + g_y \dd y + g_z \dd z) \wg \left(\frac{x}{r^3} \dd y \wg \dd z - \frac{y}{r^3} \dd y \wg \dd z \right) \\
+ &\iff \frac{x g_{x} + y g_{y} + z g_z}{r(x, y, z)} = f(x, y, z)
+\end{aligned}
+\end{equation}
+para cada $(x, y, z) \in \mm$. Geometricamente, tal condição é equivalente a
+\[
+\dd g\vert_{(x, y, z)} (\be_r) = f(x, y, z), \ \forall (x, y, z) \in \mm
+\]
+onde
+\[
+\be_r(x, y, z) = r^{-1}(x, y, z)\cdot (x, y, z)
+\]
+é o vetor unitário na direção radial - ou seja, $f$ é a derivada radial de $g$. Podemos então determinar $g$ via integrações radiais, \emph{id est}
+\[
+g(x, y, z) = \int_{1}^{r(x, y, z)} f(s \cdot \be_r) \ \dd s
+\]
+Precisamos agora verificar que tal definição de $g$ satisfaz a equação \cref{cond}. Para isso, precisaremos dos seguintes lemas:
+\begin{lema}\label{deriv}
+\textit{
+Sejam $F, b: \R^n \to \R$ funções diferenciáveis. Defina a função $H: \R^n \to \R$ por
+\[
+H(t, x_2, \cdots, x_n) = \int_{1}^{t} F(y, x_2, \cdots, x_n) \ \dd y
+\]
+Então as derivadas parciais da função $G: \R^n \to \R$ definida por 
+\[
+G(x_1, \cdots, x_n) = H(b(x_1, \cdots, x_n), x_2, \cdots, x_n)
+\] são dadas por
+\[
+\frac{\partial G}{\partial x_i} (x_1, x_2, \cdots, x_n) = \frac{\p b}{\p x_i} (x_1, x_2, \cdots, x_n) F(b(x_1, x_2, \cdots, x_n), x_2, \cdots, x_n) + \int_{1}^{b(x_1, x_2, \cdots, x_n)} \frac{\p F}{\p x_i}(y, \cdots, x_n) \ \dd y
+\]
+para cada $1 \leq i \leq n$.
+}
+\end{lema}
+\begin{demm}
+Primeiramente, segue da regra da cadeia que
+\[
+\frac{\p G}{\p x_i} = \frac{\p b}{\p x_i} \frac{\p H}{\p t} + \frac{\p H}{\p x_i}
+\]
+Agora, pelo teorema fundamental do cálculo, temos
+\[
+\frac{\p H}{\p t}(t, x_2, \cdots, x_n) = F(t, x_2, \cdots, x_n)
+\]
+E pela regra de Leibniz, temos também
+\[
+\frac{\p H}{\p x_i}(t, x_2, \cdots, x_n) = \int_{1}^{t} \frac{\p F}{\p x_i}(y, \cdots, x_n) \ \dd y
+\]
+Concluímos então que
+\[
+\frac{\partial G}{\partial x_i} (x_1, x_2, \cdots, x_n) = \frac{\p b}{\p x_i} (x_1, x_2, \cdots, x_n) F(b(x_1, x_2, \cdots, x_n), x_2, \cdots, x_n) + \int_{1}^{b(x_1, x_2, \cdots, x_n)} \frac{\p F}{\p x_i}(y, \cdots, x_n) \ \dd y
+\]
+para cada $1 \leq i \leq n$, como desejado.
+\end{demm}
+\begin{lema}\label{soma0}
+\textit{
+Seja $r: \mathbb{R}^n \to R$ a função raio, definida por $r(p) = \| p \|$ para cada $p \in \mathbb{R}^n$, e considere a função normalização $h: \R^n \to \R^n$ dada por $h(p) = \frac{p}{\| p \|} = (h_1(p), \cdots, h_n(p)) \in \R^n$. Então $h$ satisfaz
+\[
+\sum_{1 \leq i \leq n} x_i \left(h_j \right)_{x_i} = 0
+\]
+para cada $1 \leq j \leq n$ fixado.
+}
+\end{lema}
+\begin{demm}
+Um cálculo direto mostra que
+\[
+\frac{\p}{\p x_i}  h_j = \frac{\p}{\p x_i} \left(\frac{x_j}{r} \right) = \frac{\delta_{ij} r^2 - x_i x_j}{r^3}
+\]
+Portanto
+\begin{align*}
+\sum_{1 \leq i \leq n} x_i \left(h_j \right)_{x_i}  &= \frac{x_j \cdot r^2 - x_j^3}{r^3} - \sum_{\substack{1 \leq i \leq n\\
+i \neq j}} \frac{x_i^2 \cdot  x_j}{r^3} \\
+&= \frac{x_j}{r^3} \sum_{\substack{1 \leq i \leq n\\
+i \neq j}} x_i^2 - \frac{x_j}{r^3} \sum_{\substack{1 \leq i \leq n\\
+i \neq j}} x_i^2 = 0
+\end{align*}
+como desejado.
+\end{demm}
+Defina $F: \R^4 \to \R$ por $F(s, x, y, z) \doteq f(s \cdot \be_r)$. Segue do lema \cref{deriv} que 
+\[
+\frac{\p g}{\p x_i}(x, y, z) = \frac{x_i}{r} \cdot \underbrace{F(r(x, y, z), x, y, z)}_{\purple{=f(x, y, z)}} + \int_{1}^{r(x, y, z)} \frac{\p F}{\p x_i}(s, x, y, z) \ \dd s
+\]
+Agora, pela regra da cadeia, temos
+\[
+\frac{\p F}{\p x_i}(s, x, y, z) = s \cdot \left(\sum_{1 \leq j \leq 3} f_{x_j}\left(h_j \right)_i \right)
+\]
+Logo
+\[
+\frac{\p g}{\p x_i}(x, y, z) = \frac{x_i}{r} f + \int_{1}^{r(x, y, z)}  s \cdot \left(\sum_{1 \leq j \leq 3} f_{x_j}\left(h_j \right)_i \right) \ \dd s
+\]
+Assim, temos
+\[
+x_i \cdot \frac{\p g}{\p x_i}(x, y, z) = \frac{x_i^2}{r} f + \int_{1}^{r(x, y, z)}  s \cdot \left(\sum_{1 \leq j \leq 3} x_i \cdot f_{x_j}\left(h_j \right)_i \right) \ \dd s
+\] 
+Segue que
+\[
+\sum_{1 \leq i \leq 3} x_i \cdot \frac{\p g}{\p x_i}(x, y, z) = r f + s \int_{1}^{r(x, y, z)} \underbrace{\sum_{1 \leq i, j \leq n} f_j \cdot x_i (h_j)_{x_i}}_{\purple{=0, \text{ pelo lema \cref{soma0}}}} = rf
+\]
+e portanto a condição \cref{cond} é obviamente satisfeita.
+\end{dem}
+\begin{oobs}
+\emph{Mutatis mutandis,} o argumento apresentado acima se generaliza para mostrar que toda $n$-forma fechada em $\R^n$ é exata. Explicitamente, em tal caso bastará considerar 
+\[
+\tau = \frac{\displaystyle{\sum_{1 \leq i \leq n}} x_i \star(\dd x^i)}{(r(x_1, \cdots, x_n))^{\frac{n}{2}}}
+\]
+e usar os lemas demonstrados anteriormente.
+\end{oobs}
+\begin{Mybox}
+Mostre que se uma $1$-forma exata definida em uma variedade $\mm$ sem bordo é não nula em todos os pontos de $\mm$, então $\mm$ não é compacta.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{dem}
+Precisaremos do seguinte lema:
+\begin{lema}\label{sembordo}
+\textit{
+Seja $\mm$ uma variedade compacta e sem bordo e $f: \mm \to \R$ uma função suave. Então existe um ponto $p \in \mm$ tal que $\dd f_p \equiv 0$.
+}
+\end{lema}
+\begin{demm}
+Como $\mm$ é compacta e $f$ é \emph{a fortiori} contínua, existe um ponto de máximo $p \in \mm$ de $f$, ou seja, um ponto $p \in \mm$ tal que $f(p) \geq f(q)$ seja qual for $q \in \mm$. Fixe $v \in T_p \mm$ arbitrariamente e tome uma curva $\gamma: (-\varepsilon, \varepsilon) \to \mm$ tal que $\gamma(0) = p$ e $\gamma'(0) = v$. Temos então
+\begin{align*}
+\dd f_p(v) &= \left.\frac{\dd }{\dd t}\right\vert_{t = 0} (f \circ \gamma)(t) \\
+&= \lim_{t \to 0} \frac{(f \circ \gamma)(t) - (f \circ \gamma)(0)}{t}
+\end{align*} 
+Uma vez que $\gamma(0) = p$ é por construção ponto de máximo de $f$, segue que $(f \circ \gamma)(t) - (f \circ \gamma)(0) \leq 0$ seja qual for $t \in (-\varepsilon, \varepsilon)$. Portanto
+\[
+0 \geq \lim_{t \to 0^{+}} \frac{(f \circ \gamma)(t) - (f \circ \gamma)(0)}{t}, \text{ e também } 0 \leq \lim_{t \to 0^{-}} \frac{(f \circ \gamma)(t) - (f \circ \gamma)(0)}{t}
+\]
+Como $f$ é suave, os limites laterais acima coincidem, donde concluímos que
+\[
+\dd f_p(v) = \lim_{t \to 0} \frac{(f \circ \gamma)(t) - (f \circ \gamma)(0)}{t} = 0
+\]
+O resultado desejado segue então da arbitrariedade de $v$.
+\end{demm}
+Mostraremos agora a contrapositiva da questão: ou seja, que toda $1$-forma exata definida numa variedade compacta sem bordo é nula em algum ponto de $\mm$. De fato, se $\w$ é uma $1$-forma exata em uma variedade compacta em $\mm$, então $\w = \dd f$ para alguma $f: \mm \to \R$ suave, donde segue pelo lema anterior que $\w$ se anula em algum ponto de $\mm$.
+\end{dem}
+\begin{oobs}
+No caso em que $\mm$ tem bordo, o lema \cref{sembordo} é falso: para um contra-exemplo, basta considerar a $1$-forma $\dd x$ na variedade compacta uni-dimensional $[0, 1]$ (cujo bordo é $\{0, 1\}$). A demonstração desse lema não pode ser estendida ao caso com bordo pois vetores tangentes no bordo podem surgir de curvas definidas somente em intervalos da forma $(-\varepsilon, 0]$ ou $[0, \varepsilon)$, de forma que o argumento dos limites laterais coincidirem não pode mais ser usado (em tal caso $(f \circ \gamma)(t)$ não fará sentido para um dos limites laterais).
+\end{oobs}
+\begin{Mybox}
+Mostre que o produto exterior definido para formas diferenciais em uma variedade $\mm$ de dimensão $n$ induz um produto entre classes de cohomologia: para $[\w] \in H^k(\mm)$ e $[\tau] \in H^{\ell}(\mm)$ definimos
+\[
+[\w] \wedge [\tau] = [\w \wedge \tau]
+\]
+Utilizando o produto definido acima, verifique que a soma direta dos grupos de cohomologia
+\[
+H^{\ast}(\mm) = \bigoplus_{k = 0}^{n} H^k(\mm)
+\]
+admite uma estrutura de anel (no sentido algébrico).
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{oobs}
+No enunciado original da questão há um erro de digitação: devemos tomar formas $[\w] \in H^k(\mm)$ e $[\tau] \in H^{\ell}(\mm)$, não formas de mesmo grau.
+\end{oobs}
+
+\begin{dem}
+Todas as propriedades algébricas que definem um anel são obviamente satisfeitas: $H^{\ast}(\mm)$ é claramente um grupo abeliano sob a adição e um monóide sobre a operação de multiplicação $\wg$, e $\wg$ é distributiva em relação à adição por definição. Resta apenas verificar que $\wg$ induz uma aplicação (que por um abuso de notação inofensivo é também denotada por $\wg$) bem definida sob as classes de equivalência de formas fechadas (onde duas classes de equivalências são iguais se seus representantes diferem por uma forma exata - já vimos que tal relação é bem definida) - ou seja, que o produto exterior de formas fechadas é uma forma fechada e que a aplicação que $\wg$ induz sobre as classes de equivalência de formas fechadas não depende dos representantes escolhidos. De fato, 
+\begin{itemize}
+\item se $[\w] \in H^k(\mm)$ e $[\tau] \in H^{\ell}(\mm)$, então
+\[
+\dd(\w \wg \tau) = (\dd \w) \wg \tau + (-1)^k  \cdot\w \wedge \dd \tau = 0
+\]
+e portanto $\w \wg \tau$ é fechada sempre que $\w$ e $\tau$ são fechadas.
+\item se $\tau' = \tau + \dd \sigma$, então 
+\begin{align*}
+\w \wg \tau' = \w \wedge \tau + \w \wedge \dd \sigma 
+\end{align*}
+Mas como
+\[
+\dd(\w \wg \sigma) = (\dd \w) \wedge \sigma + (-1)^k \cdot \w \wg \dd \sigma = (-1)^k \cdot \w \wedge \dd \sigma \purple{\text{ (pois } \dd \w = 0 \text{, já que $\w$ é por hipótese fechada)}}
+\]
+segue que $\w \wg \sigma$ é exata: ou seja, $\w \wg \tau' $ e $\w \wg \tau $ diferem por uma forma exata, e portanto $[\w \wg \tau'] = [\w \wedge \tau]$. \emph{Mutatis mutandis, } vemos que se $\w'$ é outro representante de $\w$, então $[\w' \wg \tau] = [\w \wg \tau]$. Isso conclui a verificação que a aplicação $\wg$ está bem definida sobre as classes de equivalência.
+\end{itemize} 
+\end{dem}
+
+\begin{Mybox}
+Calcule a co-homologia de De Rham da esfera $n$-dimensional $\S^n$.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.5cm}
+\begin{dem}
+Primeiramente, note que por $\S^n$ ser conexa, $H_{\text{dR}}^0(\S^n) = \R$. No que segue, consideraremos os abertos $U = \mathbb{S}^n \setminus \{p \}$, $V = \S^n \setminus \{ q \}$, onde $p, q \in \mathbb{S}^n$ são pontos arbitrários, que são difeomorfos a $\R^n$ via a projeção estereográfica. Também é fácil ver que a interseção $U \cap V = \S^n \setminus \{p, q\}$ é difeomorfa a $\R^n \setminus \{0 \}$ (novamente via a projeção estereográfica), que tem o mesmo tipo de homotopia que $\S^{n-1}$ $\left( \text{via a retração $\R^n \setminus \{0 \} \ni x \mapsto \frac{x}{\|x\|} \in \S^{n-1}$} \right).$ No caso $n = 1$, o seguinte pedaço da sequência exata de Mayer-Vietoris
+\[H_{\text{dR}}^{-1}(U \cap V) \to H_{\text{dR}}^0(\S^1) \to H_{\text{dR}}^0(U) \oplus H_{\text{dR}}^0(V) \to H_{\text{dR}}^0(U \cap V) \to H_{\text{dR}}^1(\S^1) \to H_{\text{dR}}^1(U) \oplus H_{\text{dR}}^1(V)
+\]
+pode ser escrito como
+\[
+0 \to \R \to \R^2 \to \R^2 \to H_{\text{dR}}^1(\S^1) \to 0
+\]
+Segue que 
+\[1 - 2 + 2 - \dim H_{\text{dR}}^1(\S^1) = 0 \iff \dim H_{\text{dR}}^1(\S^1) = 1 \]
+e portanto $H_{\text{dR}}^1(\S^1) = \R$. No caso $n \geq 2$, usando o fato de que $U$ e $V$ são difeomorfos a $\R^n$ e sua interseção é conexa, vemos que o seguinte pedaço da sequência exata de Mayer-Vietoris:
+\[H_{\text{dR}}^{-1}(U \cap V) \to H_{\text{dR}}^0(\S^n) \to H_{\text{dR}}^0(U) \oplus H_{\text{dR}}^0(V) \to H_{\text{dR}}^0(U \cap V) \to H_{\text{dR}}^1(\S^n) \to H_{\text{dR}}^1(U) \oplus H_{\text{dR}}^1(V)
+\]
+pode ser escrito como
+\[0 \to \R \to \R^2 \to \R \to H_{\text{dR}}^1(\S^n) \to 0\]
+Logo,
+\[ 1 - 2 + 1 - \dim H_{\text{dR}}^1(\S^n) = 0  \iff H_{\text{dR}}^1(\S^n) = 0
+\]
+Quando $n \geq 2$ e $k \geq 2$, podemos usar o seguinte pedaço da sequência exata de Mayer-Vietoris
+\[
+0 = H_{\text{dR}}^{k-1}(U) \oplus H_{\text{dR}}^{k-1}(V) \to H_{\text{dR}}^{k-1}(U \cap V ) \cong H_{\text{dR}}^{k-1}(\S^{n-1})  \to H_{\text{dR}}^k(\S^n) \to H_{\text{dR}}^k(U) \oplus H_{\text{dR}}^k(V)  = 0
+\]
+para concluir que \[H_{\text{dR}}^{k}(\S^n) \cong H_{\text{dR}}^{k-1}(\S^{n-1})\]
+Portanto,
+\[
+H_{\text{dR}}^{n}(\S^n) \cong H_{\text{dR}}^{n-1}(\S^{n-1}) \cong \cdots H_{\text{dR}}^{2}(\S^2) \cong H_{\text{dR}}^{1}(\S^1) \cong \R
+\]
+E em geral, quando $\ell \geq 1$ e $n \geq 2$, temos de maneira inteiramente análoga
+\[
+H_{\text{dR}}^{n - \ell}(\S^n) = H_{\text{dR}}^{n - \ell - 1}(\S^{n-1}) = \cdots = H_{\text{dR}}^{2}(\S^{\ell + 2}) = H_{\text{dR}}^{1}(\S^{\ell + 1}) = 0
+\]
+Está então provado que:
+$$
+H_{\text{dR}}^k(\S^n) =\begin{cases}
+\R, & \ \text{se } k \in \{0, n \} \\
+0, & \ \text{ caso contrário}
+\end{cases}
+$$
+\end{dem}
+%\fi
+
+
+
+\begin{Mybox}
+Calcule a co-homologia de De Rham de uma superfície $S$ compacta, conexa e orientada, de gênero $g$.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{dem}
+Denotaremos uma superfície genérica que satisfaz o enunciado da questão por $\g$, e denotaremos o complemento de um ponto de $\g$ por $\gg = \g \setminus \{p\}$. Afirmo que
+$$
+H_{\text{dR}}^k(\gg) =\begin{cases}
+\R, & \ \text{ se $ k = 0 $} \\
+\R^{2g}, & \ \text{ se $k=1$} \\
+0, & \ \text{caso contrário}
+\end{cases}
+$$
+e
+$$
+H_{\text{dR}}^k(\g) =\begin{cases}
+\R, & \ \text{ se $ k \in \{0, 2\} $} \\
+\R^{2g}, & \ \text{ se $k=1$} \\
+0, & \ \text{caso contrário}
+\end{cases}
+$$
+Já lidamos com os casos $g \in \{0, 1, 2\}$ em aula. Supondo a hipótese de indução que a afirmação é válida para algum inteiro $g \geq 2$, mostraremos que também é valida para $g +1$. O caso $k = 0$ é trivial pela conexidade de todas as superfícies envolvidas. Uma vez que $\Sigma_{g+1} \cong \gg \cup \widetilde{\Sigma}_{1}$ (abertos cuja interseção tem o mesmo tipo de homotopia de $\S^1$), temos o seguinte pedaço da sequência exata de Mayer-Vietoris:
+\[ 
+0 \to H^1_{\text{dR}}(\Sigma_{g+1}) \to H^1_{\text{dR}}(\widetilde{\Sigma}_g) \oplus H^1_{\text{dR}}(\widetilde{\Sigma}_1) \overset{\alpha}{\to} \R \to H^2_{\text{dR}}(\Sigma_{g+1}) \to 0
+\]
+que pela hipótese de indução, se escreve como
+\[
+0 \to H^1_{\text{dR}}(\Sigma_{g+1}) \to \R^{2(g+1)} \overset{\alpha}{\to} \R \to H^2_{\text{dR}}(\Sigma_{g+1}) \to 0
+\]
+Pelo lema $28.3$ do livro \emph{An Introduction to Manifolds} de Loring Tu, a aplicação $\alpha \equiv 0$. Pela exatidão da sequência de Mayer-Vietoris, concluímos (basta usar repetidamente o teorema do núcleo e da imagem) então que $H^1_{\text{dR}}(\Sigma_{g+1}) = \R^{2(g+1)}$ e $H^2_{\text{dR}}(\Sigma_{g+1}) = \R$. \par 
+Resta provarmos que a afirmação é satisfeita para o inteiro $g + 1$ no caso de $\widetilde{\Sigma}_{g+1}$. Cobrindo $\Sigma_{g+1}$ com os abertos $\widetilde{\Sigma}_{g+1}$ e um disco $\mathbb{D}_p$ contendo $p$, temos o seguinte pedaço da sequência exata de Mayer-Vietoris:
+\[
+0 \to H^1_{\text{dR}}(\Sigma_{g+1}) = \R^{2(g+1)} \to H^1_{\text{dR}}(\widetilde{\Sigma}_{g+1}) \oplus H^1_{\text{dR}}(\mathbb{D}_p) \overset{\alpha}{\to} \R \to \R \to H^2_{\text{dR}}(\widetilde{\Sigma}_{g+1}) \to 0
+\]
+Novamente, $\alpha \equiv 0$, donde concluímos pela exatidão da sequência de Mayer-Vietoris que $H^1_{\text{dR}}(\widetilde{\Sigma}_{g+1}) = \R^{2(g+1)}$ e $H^k_{\text{dR}}(\widetilde{\Sigma}_{g+1}) = 0$ sempre que $k \neq 0$. Isso conclui a demonstração por indução da nossa afirmação inicial.
+\end{dem}
+
+%\iffalse
+\begin{Mybox}
+Calcule a co-homologia de de Rham do plano projetivo real $\P^2$.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{dem}
+Faremos o caso mais geral e calcularemos a co-homologia de De Rham do espaço projetivo real $\P^n$, por meio do seguinte lema
+\begin{lema}\label{quociente}
+\emph{
+Seja $G$ um grupo finito agindo numa variedade $\mm$ de forma própria e descontínua (ou seja, há uma correspondência $\varphi: G \to \sf{Diff}(\mm)$, onde $\sf{Diff}(\mm)$ denota o conjunto de todos os difeomorfismos levando $\mm$ em $\mm$). A co-homologia de De Rham de grau $k$ do quociente
+\[
+\mm/G = \{[p] \ \vert \ p \in \mm, \text{ onde } [p] = \{\varphi_g(p) \ \vert \ g \in G \} \text{ para cada } p \in \mm\}
+\]
+é o subconjunto de $H^k_{\text{dR}}(\mm)$ fixado pela ação natural de $G$, dado por
+\[
+H^k_{\text{dR}}(\mm / G) \cong (H^k_{\text{dR}}(\mm))^G \doteq \{[\omega] \ \vert \ \omega \in \Lambda^k(\mm), (\varphi_g)^{\ast}(\omega) = \omega \ \forall g \in G \}
+\]
+}
+\end{lema}
+\begin{demm}
+Considere a projeção canônica ao quociente, dada por
+\begin{align*}
+\pi: \mm &\to \mm/G \\
+p &\mapsto [p]
+\end{align*}
+Note que por construção $\pi \circ \varphi_g = \pi$ seja qual for $g \in G$. Além disso, pelo teorema do núcleo e da imagem, basta mostrar que a aplicação $$\pi^{\ast}: H^k_{\text{dR}}(\mm / G) \to H^k_{\text{dR}}(\mm)$$ é injetiva e que a sua imagem é dada por
+\[
+\operatorname{img}(\pi^{\ast}) = \{[\omega] \ \vert \ \omega \in \Lambda^k(\mm), (\varphi_g)^{\ast}(\omega) = \omega \ \forall g \in G \}
+\]
+Começaremos caracterizando a imagem de $\pi^{\ast}$. Suponha que $[\eta] \in \operatorname{img}(\pi^{\ast})$. Por definição, existe então $\overline{\eta} \in \Lambda^k(\mm / G)$ tal que $\eta = \pi^{\ast}(\overline{\eta})$. Dada $\varphi_g \in \sf{Diff}(\mm)$, vale então que
+\[
+\varphi_g^{\ast} (\eta) = \varphi_g^{*}\left[ \pi^{\ast}(\overline{\eta}) \right] = \left(\pi \circ \varphi_g \right)^{\ast}(\overline{\eta}) = \pi^{\ast}(\overline{\eta}) = \eta
+\]
+e portanto uma condição necessária para um elemento estar na imagem de $\pi^{\ast}$ é ser invariante pela ação de $G$. Estamos interessados em provar também a recíproca, ou seja, que se $(\varphi_g)^{\ast}\eta = \eta \ \forall g \in G$, então existe $\overline{\eta} \in \Lambda^k(\mm / G)$ tal que $\eta = \pi^{\ast}(\overline{\eta})$. \par 
+Suponha então que $\eta \in \Lambda^k(\mm)$ satisfaz $(\varphi_g)^{\ast}\eta = \eta \ \forall g \in G$. Primeiramente, note que o fato de $\pi$ ser um difeomorfismo local garante que $\dd \pi_p$ é um isomorfismo. Assim, dados $\overline{p} = [p] \in \mm/G$ e $\overline{v_1}, \cdots, \overline{v_k} \in T_{\overline{p}}\left(\mm / G \right)$, segue que para cada $1 \leq i \leq k$, existe $v_i \in T_p \mm$ tal que $\dd \pi_p(v_i) = \overline{v_i}$. Podemos então definir
+\[
+\overline{\eta}_{\overline{p}}(\overline{v_1}, \cdots, \overline{v_k}) = \eta_p(v_1, \cdots, v_k)
+\]
+Precisamos agora mostrar que $\overline{\eta}$ está bem definida. Seja então $q \in \mm$ tal que $[q] = [p]$ e $u_1, \cdots, u_n \in T_q \mm$ tais que $\dd \pi_q (u_i) = \overline{v_i}$. Por definição, existe $g \in G$ tal que $\varphi_g(p) = q$. Agora, uma vez que
+\begin{align*}
+\dd \pi_q \left( \dd \left(\varphi_g \right)_p (v_i)\right) &= \dd\left(\pi \circ \varphi_g \right)_p(v_i) \\
+&= \dd \pi_p (v_i) \\
+&= \overline{v_i}
+\end{align*}
+segue do fato de $\dd \pi_q$ ser um isomorfismo que $u_i = \dd \left(\varphi_g \right)_p (v_i)$. Portanto
+\begin{align*}
+\eta_q(u_1, \cdots, u_k) &= \eta_{\varphi_g(p)}(\dd \left(\varphi_g \right)_p (v_1), \cdots, \dd \left(\varphi_g \right)_p (v_k)) \\
+&= \left[\varphi_g^{\ast}(\eta) \right]_{p}(v_1, \cdots, v_k) \\
+&=\eta_p(v_1, \cdots, v_k)
+\end{align*}
+donde concluímos que $\overline{\eta}$ está de fato bem definida. É imediato da construção de $\overline{\eta}$ que $\eta = \pi^{\ast}(\overline{\eta})$. \par 
+Mostraremos agora que $\pi^{\ast}$ é injetiva. Quando $k = 0$, $H^0_{\text{dR}}(\mm)$ consiste simplesmente das funções constantes em $\mm$. Assim, se $[\overline{w}] \in H^0_{\text{dR}}(\mm) $ satisfaz $\pi^{\ast}(\overline{\omega}) = 0$, então $\overline{\omega}_{\overline{p}} = 0$ seja qual for $\overline{p} \in \mm / G$, e portanto $\overline{\omega}$ é identicamente nula. Suponhamos agora então $1 \leq k \leq n = \dim(\mm / G) = \dim(\mm)$. Se $[\omega] \doteq \pi^{\ast}(\overline{\omega}) = 0$, então $\omega$ é exata, ou seja, existe $\eta \in \Lambda^{k-1}(\mm)$ tal que $\dd \eta = \omega$. Pela caracterização da imagem de $\pi^{\ast}$ que acabamos de provar, segue que $\dd \eta$ é fixada pela ação natural de $G$, ou seja, $(\varphi_g)^{\ast}(\dd \eta) = \dd \eta$ seja qual for $g \in G$. Podemos supor sem perda de generalidade que a própria $\eta$ também é fixada pela ação natural de $G$. De fato, caso isso não fosse o caso, poderíamos trabalhar com a seguinte forma $\tau$ ao invés de $\eta$: defina $$\tau \doteq \frac{1}{|G|} \sum_{g \in G} (\varphi_g)^{\ast}(\eta)$$
+Temos então
+\begin{align*}
+\dd \tau = \frac{1}{|G|} \sum_{g \in G} \dd \left[ (\varphi_g)^{\ast}(\eta)\right] &= \frac{1}{|G|} \sum_{g \in G} \varphi_g^{\ast}(\dd \eta) \\
+&= \frac{1}{|G|} \sum_{g \in G} \dd \eta = \omega \\
+&= \dd \eta
+\end{align*}
+o que justifica a opção de trabalhar com $\tau$ ao invés de $\eta$. Além disso, $(\varphi_g^{\ast})(\tau) = \tau$ seja qual for $g \in G$ por construção. Suporemos então sem perda de generalidade que $\eta$ é preservada pela ação natural de $G$. Segue então da caracterização da imagem de $\pi^{\ast}$ que acabamos de demonstrar que $\eta = \pi^{\ast}(\overline{\eta})$ para alguma $\eta \in \Lambda^k(\mm / G)$. Como $\pi$ é um difeomorfismo local e formas são objetos de natureza local, podemos cometer o abuso de notação de escrever $\overline{\eta} = \left(\pi^{-1}\right)^{\ast}(\eta)$. Localmente, temos então
+\begin{align*}
+\dd \overline{\eta} &= \dd\left(  \left(\pi^{-1}\right)^{\ast}(\eta)\right) \\
+&=\left(\pi^{-1}\right)^{\ast} (\dd \eta ) \\
+&= \left(\pi^{-1}\right)^{\ast} (\omega) = \overline{\omega}
+\end{align*} 
+e portanto $\dd \overline{\eta} = \overline{\omega}$, de forma que $[\overline{\omega}] = 0$. Concluímos então que $\pi^{\ast}$ é injetora, como desejado. 
+\end{demm}
+Note que $\P^n = \mathbb{S}^n / \mathbb{Z}_2$, onde $\mathbb{Z}_2 = \{\operatorname{Id}_{\mathbb{S}^n}, A\}$, sendo $A$ a aplicação antípoda. Como a aplicação antípoda preserva a orientação somente no caso em que $n$ é ímpar, concluímos que os espaços projetivos de dimensão ímpar têm a mesma co-homologia de De Rham que as esferas de dimensão ímpar correspondentes. No caso em que $n$ é par, a aplicação antípoda reverte a orientação e portanto age como a multiplicação por $-1$, donde concluímos então que $H^k_{\text{dR}}(\P^{2m}) = 0$ seja qual for $k \neq 0$. Resumidamente,
+$$
+H_{\text{dR}}^k(\P^n) =\begin{cases}
+\R, & \ \text{ se $n$ é ímpar e } k \in \{0, n \} \\
+0, & \ \text{ caso contrário}
+\end{cases}
+$$
+Em particular, $H^0_{\text{dR}}(\P^2) = \mathbb{R}$ e $H^k_{\text{dR}}(\P^2) = 0$ seja qual for $k \neq 0$.
+\end{dem}
+
+\begin{Mybox}
+Calcule a co-homologia de De Rham do plano $\mathbb{R}^2$ menos um número finito de pontos.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{dem}
+Denotaremos por $\R^n_{\ell}$ o complemento de $\ell$ pontos de $\mathbb{R}^n$. Afirmo que 
+$$
+H_{\text{dR}}^k(\R^n_{\ell}) =\begin{cases}
+\R, & \ \text{ se } k = 0 \\
+\R^{\ell}, & \ \text{ se } k = n- 1 \\
+0, & \ \text{ caso contrário } 
+\end{cases}
+$$
+Já vimos que $\R^n_1$ e $\mathbb{S}^{n-1}$ têm o mesmo tipo de homotopia, portanto já lidamos com o caso $\ell = 1$. Terminaremos a prova por indução ao mostrar que se a afirmação é válida para algum inteiro $\ell \geq 1$, também é válida para $\ell+1$. Suponhamos então que a afirmação é satisfeita para um inteiro $\ell \geq 1$. Uma vez que $\R^n = \R^n_{\ell} \cup \R^n_1$ (onde o primeiro aberto da união acima é o complemento de $\ell$ pontos de $\R^n$ e o segundo é o complemento de um ponto distinto dos $\ell$ pontos anteriores), temos o seguinte pedaço da sequência exata de Mayer-Vietoris
+\[
+H^k_{\text{dR}}(\R^n) \to H^k_{\text{dR}}(\R^n_{\ell}) \oplus H^k_{\text{dR}}(\R^n_1) \to H^k_{\text{dR}}(\R^n_{\ell+1}) \to H^{k+1}_{\text{dR}}(\R^n)
+\]
+Se $k \notin \{0, n-1\}$, temos então a sequência exata
+\[
+0 \to 0 \to H^k_{\text{dR}}(\R^n_{\ell+1}) \to 0
+\]
+donde concluímos que $H^k_{\text{dR}}(\R^n_{\ell+1}) = 0$ sempre que $k \notin \{0,n-1 \}$. Como $\R^n_{\ell+1}$ é conexo, temos também $H^0_{\text{dR}}(\R^n_{\ell+1}) = \R$, de forma que resta lidarmos com o caso $k = n - 1$. Em tal caso, temos a sequência exata
+\[
+H^{n-1}_{\text{dR}}(\R^n) = 0 \to H^{n-1}_{\text{dR}}(\R^n_{\ell}) \oplus H^{n-1}_{\text{dR}}(\R^n_1) \to H^{n-1}_{\text{dR}}(\R^n_{\ell+1}) \to H^{n}_{\text{dR}}(\R^{n}) = 0
+\]
+que pela hipótese de indução se escreve como
+\[
+0 \to \R^{\ell+1} \to H^{n-1}_{\text{dR}}(\R^n_{\ell+1}) \to 0
+\]
+Portanto $H^{n-1}_{\text{dR}}(\R^n_{\ell+1}) = \R^{\ell +1}$, o que conclui a demonstração por indução da afirmação.
+\end{dem}
+%\fi
+
+\begin{Mybox}
+Mostre que o fibrado tangente da esfera $\S^3$ é trivial.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.5cm}
+\begin{oobs}
+Vimos em aula que se $\pi : E \to \mm$ é um fibrado vetorial de posto $n$ que admite um referencial global (chamado também de uma base global de seções) $\{s_i \}_{1 \leq i \leq n}$, então $E$ é um fibrado trivial. Nesse caso, diremos que o referencial $\{s_i \}_{1 \leq i \leq n}$ \textit{testemunha} a trivialidade de $E$.
+\end{oobs}
+\begin{dem}
+O espaço tangente de um ponto $p \in \S^3$ consiste de todos os vetores tangentes iniciais de curvas suaves $\gamma: (-\varepsilon, \varepsilon) \to \S^3$ que partem de $p$, ou seja
+\[
+T_p \S^3 = \{\gamma'(0) \ \vert \ \gamma: (-\varepsilon, \varepsilon) \  \to \S^3 \text{ é suave e satisfaz } \gamma(0) = p, \text{ com } \varepsilon > 0 \text{ arbitrário}\}
+\]
+Qualquer tal curva obviamente satisfaz $\| \gamma \|^2 = \langle \gamma, \gamma \rangle = 1$. Derivando tal igualdade e a avaliando em $t = 0$, concluímos que $\langle \gamma'(0), p \rangle = 0$. Isso mostra que $T_p \S^3 \subset p^{\perp} = \{v \in \R^4 \ \vert \ \langle v, p \rangle = 0 \}$. Agora, se $0 \neq v \in \R^4$ satisfaz $\langle v, p \rangle = 0$, então definindo a seguinte curva (onde podemos tomar, por exemplo, $\varepsilon = 1$)
+$$(-\varepsilon, \varepsilon) \ni t \mapsto \gamma_v(t) \doteq \cos(t) p + \frac{\operatorname{sen}(t)}{\| v \|} v$$
+vemos que $\gamma_v$ satisfaz $\operatorname{Im}(\gamma_v) \subset \S^3$ (pois $p$ e $v$ são por hipótese ortogonais e vale a identidade trigonométrica $\cos^2(t) + \operatorname{sen}^2(t) = 1$), $\gamma_v(0) = p$ e $\gamma_v'(0) = \frac{v}{\|v\|} \in  T_{p} \S^3$. Como $T_p \S^3$ é um espaço vetorial, temos também que $v \in T_{p} \S^3$. Pela arbitrariedade de $v$, segue que $p^{\perp} \subset T_p \S^3$. Assim, concluímos então que
+\[
+T_p \S^3 = p^{\perp} = \{v \in \R^4 \ \vert \ \langle p, v \rangle = 0 \}
+\]
+Nos inspirando agora no fato de que o campo $\S^1 \ni (x, y) \mapsto (-y, x)$ é uma seção global de $\S^1$ (que, por virtude da unidimensionalidade de $\S^1$, testemunha a trivialiade do fibrado $T \S^1$), podemos considerar o campo
+\[\begin{aligned}
+s_1 : \S^3 &\to T \S^3 \\
+p = (x, y, z, w) &\mapsto (p, -y, x, w, -z)
+\end{aligned}
+\]
+E para produzir mais duas seções que testemunhem a trivialidade do fibrado tangente de $\S^3$, podemos aplicar matrizes de rotações apropriadas a $s_1$ e obter mais dois campos ortogonais entre si que, juntos, formam (pontualmente) uma base do complemento ortogonal em $\S^3$ do espaço gerado por $s_1$. A saber, podemos considerar também os campos
+\[\begin{aligned}
+s_2: \S^3 &\to T\S^3 \\
+p = (x, y, z, w) &\mapsto (p, z, w, -x, -y)
+\end{aligned}
+\] 
+e 
+\[\begin{aligned}
+s_3: \S^3 &\to T\S^3 \\
+p = (x, y, z, w) &\mapsto (p, w, -z, y, -x)
+\end{aligned}
+\] 
+Como $s_1, s_2$ e $s_3$ são ortogonais entre si, tais seções são linearmente independentes (é trivial verificar que de fato $s_i(p) \in \{p\} \times T_{p} \S^3 \cong T_p \S^3 = p^{\perp}$ seja qual for $p \in \mm$ e $1 \leq i \leq 3$.). E como $$\dim(T_p \S^3) = 3 \ \forall p \in \mm$$
+segue que $s_1, s_2$ e $s_3$ são uma base global de seções de $T \S^3$.  Como vimos em aula, isso garante a trivialidade de $T \S^3$.
+\end{dem}
+%\fi
+
+
+
+\begin{Mybox}
+Seja $f: \S^3 \to \S^2$ diferenciável. Fixe orientações para as esferas e escolha uma forma de volume $\theta$ em $\S^2$ tal que \[\int_{\S^2} \theta = 1 \]
+Assumindo que os grupos de co-homologia de de Rham das esferas é conhecido, mostre que:
+\begin{itemize}
+\item existe $\eta \in \Lambda^1(\S^3)$ tal que $\dd \eta = f^{*}(\theta)$.
+\item Definindo
+\[
+H(f) = \int_{\S^3} \eta \wg \dd \eta
+\]
+o valor de $H(f)$ não depende da escolha de $\theta$ e de $\eta$.
+\item Calcule o valor de $H(h)$, onde $h$ é a aplicação que define a fibração de Hopf.
+\end{itemize}
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{oobs}
+Denotaremos as coordenadas usuais em $\R^4$ e $\R^3$ por $(x, y, z, t)$ e $(x, y, z)$, respectivamente (o que constitui um abuso de notação inofensivo). A aplicação $h$ que define a fibração de Hopf é dada por
+\[
+\begin{aligned}
+h: \S^3 &\to \S^2 \\
+\S^3 \ni p = (x, y, z, t) &\mapsto h(p) = (2(xz+yt), 2(yz-xt), x^2 + y^2 - z^2 - t^2) \in \S^2
+\end{aligned}
+\]
+\end{oobs}
+\begin{dem}
+Considere a seguinte $2$-forma de volume \quotes{canônica} na esfera $\S^2$:
+\[
+\omega = x \cdot \dd y \wg \dd z - y \cdot \dd x  \wg \dd z + z \cdot  \dd x \wg \dd y
+\]
+Sabemos do cálculo que 
+\[
+\int_{\S^2} \omega= 4 \pi 
+\]
+Definindo então $\theta \doteq \frac{1}{4 \pi} \omega$, temos
+\[
+\int_{\S^2} \theta = 1
+\]
+E podemos considerar as orientações das esferas em questão como sendo as correspondentes às suas formas de volumes \quotes{canônicas}. Sendo assim
+
+\begin{itemize}
+\item Note que $\dd \theta = 0$ por motivos de dimensão (já que $\dd \theta$ é uma $3$-forma em $\S^2$), logo $\theta$ é uma forma fechada. Como o pullback comuta com a derivada exterior, $f^{*}(\theta)$ também é uma $2$-forma fechada em $\S^3$. Agora, como $H^2_{\text{dR}}(\S^3) = 0$ (o que acontece se, e só se, toda $2$-forma fechada em $\S^3$ também é exata), segue que existe $\eta \in \Lambda^1(\S^2)$ tal que $\dd \eta = f^{*}(\theta)$.
+\item Primeiramente, seja $\xi$ outra $1$-forma em $\S^2$ tal que $\dd \xi = f^{*}(\theta)$. Temos então que
+\[ \begin{aligned}
+\dd(\xi \wedge \eta) &= \dd \xi \wg \eta + (-1)^1 \cdot  \xi \wedge \dd \eta \\
+&= (-1)^{2 \cdot 1} \cdot \eta \wedge \dd \xi - \xi \wg \dd \eta \\
+&= \eta \wedge f^{*}(\theta) - \xi \wedge f^{*}(\theta)
+\end{aligned}
+\]
+Agora, pelo teorema de Stokes 
+\[
+\int_{\S^3} \eta \wedge f^{*}(\theta) - \int_{\S^3} \xi \wedge f^{*}(\theta) = \int_{\S^3} \dd(\xi \wedge \eta) = \int_{\partial \S^3 = \emptyset} \xi \wedge \eta = 0
+\]
+E portanto $H(f)$ não depende da escolha de $\eta$. Mostraremos em seguida que $H(f)$ também não depende da escolha de $\theta$. Seja então $\zeta$ outra forma de volume em $\S^2$ que satisfaz
+\[
+\int_{\S^2} \zeta = 1
+\]
+Novamente, por motivos de dimensão ambas $\theta$ e $\zeta$ são fechadas. Como $H^2_{\text{dR}}(\S^2) = \mathbb{R}$, tanto $\theta$ quanto $\zeta$ geram $H^2_{\text{dR}}(\S^2)$. E como vimos na prova da dualidade de Poincaré, a aplicação
+\[
+H^{2}_{\text{dR}}(\S^2) \ni [\omega] \mapsto \int_{\S^2} \omega \in \mathbb{R}
+\] 
+é um isomorfismo. Segue então do fato de que
+\[
+0 = \int_{\S^2} \theta - \int_{\S^2} \zeta = \int_{\S^2} (\theta - \zeta)
+\]
+que $[\theta] = [\zeta]$. Por definição, temos então que $\theta$ e $\zeta$ diferem por uma forma exata, ou seja, existe $\beta \in \Lambda^1(\S^2)$ tal que $\theta - \zeta = \dd \beta$. Logo
+\begin{align*}
+\int_{\S^3} \eta \wg f^{*}(\theta) - \int_{\S^3} \eta \wedge f^{*}(\zeta) &= \int_{\S^3} \eta \wg f^{*}(\dd \beta) \\
+&= \int_{\S^3} \{ \dd \eta \wedge f^{*}( \beta) - \dd(\eta \wedge f^{*}(\beta)) \} \\
+&= \int_{\S^3} \dd \eta \wedge f^{*}( \beta) - \underbrace{ \int_{\partial \S^3 = \emptyset} \eta \wg f^{*}(\beta) }_{=0} \\
+&=  \int_{\S^3} f^{*}(\theta)   \wedge f^{*}( \beta) \\
+&= \int_{\S^3} f^{*}(\theta \wg \beta)  \\
+&=0
+\end{align*}
+onde na última linha usamos o fato de que $\theta \wg \beta \equiv 0$ é uma $3$-forma em $\S^2$ (e portanto ela e seu pullback se anulam). Concluímos então que $H(f)$ não depende da escolha de $\theta$ e de $\eta$, como desejado.
+\item Precisamos primeiramente calcular $h^{*}(\theta)$ e encontrar $\eta \in \Lambda^1(\S^3)$ tal que $\dd \eta =h^{*}(\theta)$. Como $h^{*}(\theta)$ é uma $2$-forma em $\S^3$, existem seis funções reais suaves $\{a_{12}, a_{13}, a_{14}, a_{23}, a_{24}, a_{34}\} \subset \mathcal{C}^{\infty}(\S^3)$ tais que
+\[
+h^{*}(\theta) = a_{12} \cdot \dd x \wg \dd y + a_{13} \cdot \dd x \wg \dd z + a_{14} \cdot \dd x \wg \dd t + a_{23} \cdot \dd y \wg \dd z + a_{24} \cdot \dd y \wg \dd t + a_{34} \cdot \dd z \wg \dd t
+\]
+Avaliando os dois lados da igualdade acima em $(\be_i, \be_j)$ para cada $1 \leq i, j \leq 3$ (com $i \neq j$, claro), vemos que para cada $q = (x, y, z, t) \in \S^3$, vale
+\[
+a_{ij}(q) = (h^{*}(\theta))_{q}(\be_i, \be_j) = \theta_{h(q)} (\dd h_{q}(\be_i), \dd h_{q} (\be_j)) 
+\]
+Calcularemos agora então a matriz $\dd h_{q}$. Temos
+\[
+\begin{aligned}
+\dd h_q &= \begin{pmatrix}
+\dd h_q(\be_1) & \dd h_q(\be_2) & \dd h_q(\be_3) & \dd h_q(\be_4) 
+\end{pmatrix} \\
+&= \begin{pmatrix}
+2z & 2t & 2x & 2y \\
+-2t & 2z & 2y & -2x \\
+2x & 2y & - 2z & - 2t 
+\end{pmatrix}
+\end{aligned}
+\]
+Portanto, 
+\begin{align*}
+4\pi \cdot a_{12}(q) &= 4\pi \cdot \theta_{h(q)}((2z, -2t, 2x), (2t, 2z, 2y)) \\
+&= 2(xz + yt) \begin{vmatrix}
+-2t & 2x \\
+2z & 2y 
+\end{vmatrix} - 2(yz - xt) \begin{vmatrix}
+2z & 2x \\
+2t & 2y
+\end{vmatrix} + (x^2 + y^2 - z^2 - t^2) \begin{vmatrix}
+2z & -2t \\ 
+2t & 2z
+\end{vmatrix} \\
+&= 2(xz+yt)(-4yt - 4xz) - 2(yz - xt)(4yz - 4xt) + (x^2 + y^2 - z^2 - t^2)(4z^2 + 4t^2) \\ 
+&= \cdots \purple{\text{ expandiremos e agruparemos os termos em seguida}} \\
+&= -4t^2(x^2 + y^2 + z^2 + t^2) - 4z^2(x^2 + y^2 + z^2 + t^2) \\
+&= -4(t^2 + z^2)
+\end{align*}
+De maneira inteiramente análoga, obtemos
+\begin{align*}
+4\pi \cdot a_{13}(q) &= -4(xt -  yz) \\
+4\pi \cdot a_{14}(q) &= 4(xz + yt) \\
+4\pi \cdot a_{23}(q) &= -4(xz + yt) \\
+4\pi \cdot a_{24}(q) &= -4(xt - yz) \\
+4\pi \cdot a_{34}(q) &= -4(x^2 + y^2)
+\end{align*}
+Logo,
+\begin{equation}\label{theta}
+\begin{aligned}
+4\pi \cdot h^{*}(\theta) = &-4(z^2 + t^2) \cdot \dd x \wg \dd y - 4(xt - yz) \cdot \dd x \wg \dd z + 4(xz+yt) \cdot \dd x \wg \dd t \\
+&-4(xz + yt) \cdot \dd y \wg \dd z - 4(xt - yz) \cdot \dd y \wg \dd t - 4(x^2 + y^2) \cdot \dd z \wg \dd t
+\end{aligned}
+\end{equation}
+Agora, como
+\[
+x^2 + y^2 + z^2 + t^2 = 1, \ \forall q = (x, y, z, t) \in \S^3
+\]
+temos que
+\[
+x \cdot \dd x + y \cdot \dd y + z \cdot \dd z + t \cdot \dd t = 0
+\]
+Daí, obtemos
+\begin{equation}\label{teste1}
+\begin{aligned}
+-4(z^2 + t^2)\cdot \dd x \wg \dd y &= -4(1-x^2 - y^2) \cdot  \dd x \wg \dd y  \\
+&=-4 \cdot \dd x \wg \dd y + 4x \cdot (x \cdot \dd x) \wg \dd y + 4y \cdot \dd x \wg (y \cdot \dd y) \\
+&= -4 \cdot \dd x \wg \dd y + 4x \cdot (-y \cdot \dd y - z \cdot \dd z - t \cdot \dd t ) \wg \dd y \\
+&\hspace{0.2cm}+ 4y \cdot \dd x \wedge (-x \cdot \dd x - z \cdot \dd z - t \cdot \dd t) \\
+&=-4 \cdot \dd x \wg \dd y + 4xz \cdot \dd y \wg \dd z + 4xt \cdot \dd y \wg \dd t - 4yz \cdot \dd x \wg \dd z - 4yt \cdot \dd x \wg \dd t
+\end{aligned}
+\end{equation}
+Analogamente, temos
+\begin{equation}\label{teste2}
+\begin{aligned}
+- 4(x^2 + y^2) \cdot \dd z \wg \dd t &= -4(1-z^2 -t^2) \cdot \dd z \wg \dd t \\
+&=-4 \cdot \dd z \wg \dd t - 4xz \cdot \dd x \wg \dd t - 4yz \cdot \dd y \wg \dd t + 4xt \cdot \dd x \wg \dd z + 4yt \cdot \dd y \wg \dd z
+\end{aligned}
+\end{equation}
+Substituindo as expressões \cref{teste1} e \cref{teste2} na equação \cref{theta}, obtemos
+\[ \begin{aligned}
+h^{*}(\theta) &= -\frac{1}{\pi} \cdot  (\dd x \wg \dd y + \dd z \wg \dd t) \\
+&= \dd \left(-\frac{1}{\pi} \cdot (x \cdot \dd y + z \cdot \dd t) \right)
+\end{aligned}
+\]
+Estamos então justificados em tomar $\eta$ como sendo
+\[
+\eta = -\frac{1}{\pi} \cdot (x \cdot \dd y + z \cdot \dd t)
+\]
+Agora, um cálculo direto mostra que
+\[
+\eta \wg \dd \eta = \frac{1}{\pi^2} \cdot  (x \cdot \dd y \wg \dd z \wg \dd t + z \cdot \dd x \wg \dd y \wg \dd t)
+\]
+Assim,
+\begin{align*}
+H(h) &= \int_{\S^3} \eta \wg \dd \eta \\
+&= \frac{1}{\pi^2} \cdot \int_{\S^3}  (x \cdot \dd y \wg \dd z \wg \dd t + z \cdot \dd x \wg \dd y \wg \dd t) \\
+&=  \frac{2}{\pi^2} \cdot \int_{\S^3}  x \cdot \dd y \wg \dd z \wg \dd t \purple{ , \text{ por simetria}}
+\end{align*}
+Note que na última igualdade, para formalizar o argumento da simetria, basta aplicar o teorema da mudança de variáveis para a mudança de coordenadas $(x, y, z, t) \mapsto (z, y, x, t)$, cuja matriz jacobiana tem determinante $-1$. Usando coordenadas esféricas na forma
+\[ \begin{aligned}
+&x = \sen(a) \sen(b) \cos(c) \\
+&y = \sen(a) \sen(b) \sen(c) \\
+&z = \sen(a)\cos(b) \\
+&t = \cos(a)
+\end{aligned}
+\]
+com $a, b \in [0, \pi]$ e $c \in [0, 2\pi]$,  obtemos então
+\[\begin{aligned}
+H(h) &= \frac{2}{\pi^2} \cdot \int_{0}^{\pi} \int_{0}^{\pi} \int_{0}^{2\pi} \sen^4(a) \sen^3(b) \cos^2(c) \ \dd c \ \dd b \ \dd a \\
+&=  \frac{2}{\pi^2}  \cdot \frac{\pi^2}{2} \\
+&= 1
+\end{aligned}
+\]
+Concluímos então que $H(h) = 1$.
+\end{itemize}
+
+\end{dem}
+
+%\iffalse
+\begin{Mybox}
+Seja $\pi: E \to \mm$ um fibrado vetorial sobre $\mm$ e seja $f: \nn \to \mm$ uma aplicação diferenciável entre variedades diferenciáveis. Considere:
+\[
+f^{*}(E) = \{(p, u) \in \nn \times E \ \vert \ f(p) = \pi(u) \}
+\]
+Mostre que a projeção no primeiro fator $\pi_1: f^{*}(E) \to \nn$ define um fibrado vetorial com espaço total $f^{*}(E)$ e espaço base $\nn$ (chamado fibrado pullback pela aplicação $f$).
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{oobs}
+Por completude, incluíremos agora a definição de um fibrado vetorial. Um fibrado vetorial de posto $n$ sobre uma variedade diferenciável é uma variedade diferenciável $E$ juntamente com uma aplicação suave e sobrejetora $\pi: E \to \mm$ que satisfaz as seguintes condições
+\begin{enumerate}
+\item Para cada $p \in \mm$, a fibra
+\[
+E_p \doteq \pi^{-1}(\{p\})
+\]
+é um espaço vetorial real de dimensão $n$.
+\item Para cada $p \in \mm$ existe uma vizinhança $U_p \ni p$ de $p \in \mm$ e um difeomorfismo 
+\[
+\psi_p: \pi^{-1}(U_p) \to  U \times \R^n
+\]
+tal que, se $\pr : U_p \times \R^n \to U_p$ denota a projeção na primeira coordenada, então 
+\[
+\pi = \pr \circ \psi_p
+\]
+\item Para cada $q \in U$, a aplicação
+\[
+\psi_p\vert_{E_q} : E_q \to \{q \} \times \R^n \cong \R^n
+\] 
+é um isomorfismo entre espaços vetoriais.
+\end{enumerate}
+\begin{oobs}
+Denotaremos a aplicação $\psi_p\vert_{E_q}$ do item (iii) acima por $\xi^E_{p, q}$. Além disso, para eliminar possíveis confusões, denotaremos a aplicação $\pi: E \to \mm$ por $\pi_E$, o fibrado $f^{*}(E)$ por $\widetilde{E}$, a aplicação $\pi_1: \widetilde{E} \to \nn $ por $\pi_{\widetilde{E}}$, e a projeção na segunda coordenada por $\prr : U_p \times \R^n \to \R^n$.
+\end{oobs}
+\end{oobs}
+
+\begin{oobs}
+Para demonstrar que um conjunto $E$ admite uma estrutura de fibrado, não há necessidade de se provar anteriormente que $E$ admite uma estrutura de variedade diferenciável para depois provarmos que o mesmo satisfaz as condições (i) a (iii). Isso acontece pois tais condições já implicam na existência de tal estrutura: de fato, se $\{U_{\alpha} \}_{\alpha \in I}$ é um atlas de $\mm$, a coleção $\{\psi_{\alpha} \}_{\alpha \in I}$,
+\[
+\psi_{\alpha} : \pi^{-1}(U_{\alpha}) \to U_{\alpha} \times \R^n
+\]
+induz naturalmente um atlas em $E$ (e portanto induz também uma estrutura topológica e uma estrutura diferenciável para $E$). 
+\end{oobs}
+
+\begin{dem}
+Suponha que $E$ tenha posto $n$ sobre $\mm$. Primeiramente, note que para cada $p \in \nn$, temos
+\[ \begin{aligned}
+\widetilde{E}_p = \pi_{\widetilde{E}}^{-1}(\{p \}) &= \{p \} \times \{u \in E \ \vert \ f(p) = \pi_E(u) \} \\
+&= \{p \} \times \pi_E^{-1}(\{f(p)\}) \\
+&=  \{p \} \times E_{f(p)} \\
+&\cong E_{f(p)}
+\end{aligned}
+\]
+Logo, segue do fato de $E$ ser (por hipótese) um fibrado vetorial de posto $n$ sobre $\mm$ que $\widetilde{E}_p$ é um espaço vetorial real de dimensão $n$, o que mostra que a condição (ii) é satisfeita. \par 
+Seja agora $p \in \nn$ arbitrário. Considere a vizinhança $\widetilde{U}_p$ de $p$ definida por $\widetilde{U}_p \doteq f^{-1}(U_{f(p)})$, onde $U_{f(p)}$ é uma vizinhança de $f(p) \in \mm$ \purple{\text{- note que por $f$ ser suave, e \emph{a fortiori} contínua, $\widetilde{U}_p$ é de fato uma vizinhança de $p$ -}} satisfazendo as hipóteses (ii) e (iii) (cuja existência é garantida pela hipótese de $E$ ser um fibrado vetorial sobre $\mm$). Definimos então a aplicação 
+\begin{align*}
+\varphi_p : \pi_{\widetilde{E}}^{-1}(\widetilde{U}_p ) \subset \widetilde{E} &\to \widetilde{U}_p \times \R^n \\
+(q, u) &\mapsto (q, \xi^E_{f(p), f(q)}(u))
+\end{align*}
+Por construção, é evidente que $\pi_{\widetilde{E}} = \pr \circ \varphi_p$ (onde tal igualdade faz sentido, claro). É claro também (novamente, por construção) que a inversa de $\varphi_p$ é dada por
+\begin{align*}
+\varphi_p^{-1} : \widetilde{U}_p \times \R^n &\to \pi_{\widetilde{E}}^{-1}(\widetilde{U}_p ) \subset \widetilde{E} \\
+(q, v) &\mapsto (q, (\xi^E_{f(p), f(q)})^{-1}(v))
+\end{align*}
+\begin{oobs}
+Lembramos que uma função contínua $F: \mm_1 \to \mm_2$ entre duas variedades de dimensões $n$ e $m$, respectivamente, é dita diferenciável em $p \in \mm_1$ se existe uma carta $(\varphi, U)$ em torno de $p$ e uma carta $(\xi, V)$ em torno de $F(p)$ tal que a composição $\xi \circ F \circ \varphi^{-1}: \varphi(F^{-1}(V) \cap U)$ é diferenciável em $\varphi(p)$. Quando isso acontece em todo $p \in \mm_1$, dizemos que $F$ é diferenciável.\par
+Portanto, também é óbvio por construção que $\varphi_p$ e sua inversa são suaves: de fato, dado $(q, u) \in  \pi_{\widetilde{E}}^{-1}(\widetilde{U}_p )$, a própria $\varphi_p$ é uma carta em torno do ponto $(q, u)$, e tomando uma carta $x_q$ em torno de $q \in \nn$ (que poderia sem perda de generalidade ser tomada como uma carta inicial em torno do próprio $p$, pois diferenciabilidade é uma propriedade local - e portanto pode ser verificada em abertos arbitrariamente pequenos), que induz a carta \[ \widetilde{U}_{q} \times \R^n \ni (w, v) \mapsto (x_q \times \operatorname{Id})(w, v)  = (x_q(w), v) \in \R^{\dim(\nn)} \times \R^n\]
+em torno de $\varphi_p(q)$, as composições 
+\[ \begin{aligned}
+&(x_q \times \operatorname{Id}) \circ \varphi_p \circ (\varphi_p)^{-1} \\
+&\varphi_p \circ (\varphi_p)^{-1} \circ (x_q \times \operatorname{Id})^{-1}
+\end{aligned}
+\]
+são trivialmente diferenciáveis. Alternativamente e de maneira mais simples, poderíamos utilizar o fato de que as componentes de $\varphi_p$ e sua inversa são trivialmente suaves. Concluímos então que $\varphi_p$ é um difeomorfismo. \par 
+Finalmente, uma vez que para cada $q \in \widetilde{U}_p$, temos
+\[
+\varphi_p\vert_{E_q} = \xi_{f(p), f(q)} : E_{f(q)} \to \R^n
+\]
+segue que $\varphi_p\vert_{E_q}$ é um isomorfismo para cada $q \in \widetilde{U}_p$ (novamente, pela hipótese de $E$ ser um fibrado vetorial sobre $\mm$, que garante que $\xi_{f(p), f(q)}$ é um isomorfismo). Pelo que fizemos até aqui, está demonstrado que a projeção no primeiro fator $\pi_1: f^{*}(E) \to \nn$ definie um fibrado vetorial com espaço total $f^{*}(E)$ e espaço base $\nn$, como desejado.
+\end{oobs}
+\end{dem}
+%\fi
+
+\begin{Mybox}
+Seja $\mm$ uma variedade diferenciável compacta, conexa e orientável. Mostre que se a dimensão de $\mm$ é ímpar, então a característica de Euler de $\mm$ é zero.
+\vspace{-.4cm}
+\end{Mybox}
+\vspace{-.4cm}
+
+\begin{dem}
+Como nesse caso os grupos de co-homologia de de Rham todos têm dimensão finita, segue da dualidade de Poincaré que
+\[
+\dim(H^k_{\text{dR}}(\mm)) = \dim(H^{n-k}_{\text{dR}}(\mm)), \ \forall k \in \{0, \cdots, n\}
+\]
+onde denotamos $n = \dim(\mm)$. Segue da hipótese de $\dim(\mm)$ ser ímpar que existe $m \in \mathbb{Z}$ tal que $n = 2m + 1$. Chamemos $d_i \doteq \dim(H^i_{\text{dR}}(\mm))$ e $a_i = (-1)^i d_i$ para cada $i  \in \{0, \cdots, n\}$. Sabemos que 
+\[
+\chi(\mm) = \sum_{i = 0}^{2m+1} (-1)^i \dim(H^i_{\text{dR}}(\mm)) = \sum_{i = 0}^{2m+1}a_i = \sum_{i = 0}^{m} (a_i + a_{n-i})
+\]
+Note que se $i\in \{0, \cdots, m\}$ é par, temos $a_i = d_i = -a_{n-i}$, enquanto que se $i\in \{0, \cdots, m\}$ é ímpar, temos $a_i = -d_i = -a_{n-i}$. Portanto $a_i + a_{n-i} = 0$ seja qual for $i\in \{0, \cdots, m\}$. Concluímos então que
+\[
+\chi(\mm) = \sum_{i = 0}^{m} (a_i + a_{n-i}) =  \sum_{i = 0}^{m} 0 =  0
+\]
+\end{dem}
+\end{document}
+
+
+

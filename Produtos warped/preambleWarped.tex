@@ -1,0 +1,264 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath, amsfonts}
+\usepackage{amsthm}
+\usepackage{etoolbox}
+\usepackage{lmodern}
+\usepackage{lastpage}
+\usepackage{totcount}
+\everymath{\displaystyle}
+%\usepackage[sc]{mathpazo}
+%\linespread{1.05} 
+\usepackage{mathrsfs}
+\usepackage{faktor}
+
+
+\definecolor{navybluegalaxy}{RGB}{0, 36, 93}
+\newcommand{\bigslant}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+\newcommand{\mycitep}[1]{{\color{teal}\textbf{\cite{#1}}}}
+\definecolor{gal}{RGB}{0, 7, 111}
+
+
+
+
+
+
+\makeatletter
+\patchcmd{\f@nch@head}{\rlap}{\color{BlueViolet}\rlap}{}{}
+%\patchcmd{\headrule}{\hrule}{\color{TealBlue}\hrule}{}{}
+\patchcmd{\f@nch@foot}{\rlap}{\color{BlueViolet}\rlap}{}{}
+\patchcmd{\footrule}{\hrule}{\color{green}\hrule}{}{}
+\makeatother
+
+\newtheorem{exerc}{Questão}
+\usepackage{float,framed}
+\setlength{\intextsep}{2pt}
+\setlength{\textfloatsep}{2pt}
+\newfloat{Box}{H}{0ob}
+\newenvironment{Mybox}{\begin{Box}\begin{framed}\begin{exerc}}{\end{exerc}\end{framed}\end{Box}}
+
+
+
+%\usepackage[shortlabels]{enumitem}
+
+\usepackage[a4paper,bottom=0.9in,top=0.9in,left=0.3in,right=0.3in]{geometry}
+
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+\usepackage{lastpage}
+\usepackage{graphicx}
+\everymath{\displaystyle}
+\newcommand{\p}{\partial}
+\pagestyle{fancy}
+%\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+%\rhead{\color{BlueViolet}\textbf{2022/1}}
+%\chead{\textbf{\thepage}}
+\lhead{\color{BlueViolet}\textbf{\textit{Produtos warped}}}
+\lfoot{\textbf{MATHEUS A. R. M. HORÁCIO}}
+%\rfoot{\textbf{MATRÍCULA: 17/0110923 }}
+\rfoot{\textbf{Página \thepage \ de \pageref*{LastPage}}}
+  \renewcommand\headrule{%
+
+ \color{BlueViolet}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+  \renewcommand\footrule{%
+
+ \color{BlueViolet}\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+}
+
+
+
+
+\newcommand{\om}{\mathbb{M}}
+
+\newcommand{\jps}[1]{\textcolor{blue}{#1}}
+%\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\pur}[1]{\textcolor{purple}{#1}}
+\newcommand{\maggg}[1]{\textcolor{magenta}{#1}}
+
+%\usepackage{color}
+%\definecolor{SAEblue}{rgb}{0, .62, .91}
+%\renewcommand\theequation{\red{{\arabic{equation}}}}
+
+
+\makeatletter
+\let\mytagform@=\tagform@
+\def\tagform@#1{\maketag@@@{\bfseries\jps{(\ignorespaces#1\unskip\@@italiccorr)}}\hspace{3mm}}
+\renewcommand{\eqref}[1]{\textup{\mytagform@{\ref{#1}}}}
+\makeatother
+
+
+%\chead{\textbf{\thepage}}
+\theoremstyle{definition}
+\newtheorem{def*}{Definição}
+\newtheorem{quest}{Questão}
+\newtheorem{quest2}{Questão}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\lnr}{\left\|}
+\newcommand{\ssum}{\displaystyle\sum}
+\newcommand{\rnr}{\right\|}
+%\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\DeclareMathOperator{\hol}{Hol}
+\newtheorem*{obs*}{Notação}
+%\newtheorem*{oobs}{Observação}
+\newtheorem{sublema}{Sub-lema}
+\renewcommand{\qedsymbol}{\rule{0.7em}{0.7em}}
+\newenvironment{demm}{\smallskip \noindent{\bf \underline{Demonstração:}}}
+{\begin{flushright} $\qedsymbol$\end{flushright}\smallskip}
+
+
+\allowdisplaybreaks
+
+\usepackage{tikz}
+
+\newcommand\PlaceText[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+
+
+\newtheoremstyle{theoremDEF}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{cyan}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{D.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremDEF}
+\newtheorem{deff}{Definição}
+
+\newtheoremstyle{theoremEX}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{BlueViolet}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{E.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremEX}
+\newtheorem{exem}{Exemplo}
+
+\newtheoremstyle{theoremOOBS}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{violet}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{O.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremOOBS}
+\newtheorem{oobs}{Observação}
+
+
+\newtheoremstyle{theoremNOT}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{cyan}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{N.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremNOT}
+\newtheorem{nott}{Notação}
+
+
+\newtheoremstyle{theoremLEM}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {}% name of font to use in the body of the theorem
+  {1pt}% measure of space to indent
+  {\bfseries\color{navybluegalaxy}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{L.#2})\textbf{\thmnote{ (#3)}.}}}
+
+\theoremstyle{theoremLEM}
+\newtheorem{lema}{Lema}
+
+\newtheoremstyle{theoremTEO}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {5pt}% measure of space to indent
+  {\bfseries\color{gal}}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\underline{\thmname{#1} (\thmnumber{T.#2})\textbf{\thmnote{ (#3)}.}}}
+  
+
+
+\theoremstyle{theoremTEO}
+\newtheorem{teorema}{Teorema}
+
+
+
+\usepackage{csquotes}
+\usepackage{lettrine}
+\newcommand{\quotes}[1]{``#1''}
+\newcommand{\bl}[1]{\textnormal{\textcolor{black}{#1}}}
+\newcommand{\colch}[1]{\left\{ #1 \right\}}
+
+
+
+\makeatletter
+\let\NAT@parse\undefined
+\makeatother
+
+
+\usepackage{hyperref}
+\hypersetup{
+	pagebackref=true,
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,
+    citecolor = teal  %choose some color if you want links to stand out
+}
+
+\usepackage{cleveref}
+
+
+\crefname{deff}{}{definitions}
+\crefname{exem}{}{exemplos}
+\crefname{col}{}{corolários}
+\crefname{equation}{}{equações}
+\creflabelformat{equation}{#2{\bf{\color{blue}(#1)}}#3}
+\crefname{teorema}{}{teoremas}
+\crefname{oobs}{observação}{observações}
+\creflabelformat{oobs}{#2\bf{\color{violet}(O.#1)}#3}
+\crefname{lema}{}{lemas}
+\creflabelformat{lema}{#2\bf{\color{gal}(L.#1)}#3}
+\crefname{proposicao}{}{proposições}
+\creflabelformat{deff}{#2\bf{\color{cyan}(D.#1)}#3}
+\creflabelformat{exem}{#2\bf{\color{BlueViolet}(E.#1)}#3}
+\creflabelformat{col}{#2\bf{\color{Aquamarine}(C.#1)}#3}
+\creflabelformat{proposicao}{#2{\bf\color{Sepia}(P.#1)}#3}
+%\renewcommand{\theenumi}{\Alph{enumi}}
+
+\newcommand{\Hess}{\text{Hess}}
+\newcommand{\grad}{\text{grad}}
+\newcommand{\bb}{\mathcal{B}}
+\newcommand{\conjunto}[2]{\{#1 \ \vert \ #2 \}}
+
+
+

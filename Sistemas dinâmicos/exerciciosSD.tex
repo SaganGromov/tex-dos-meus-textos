@@ -1,0 +1,53 @@
+\input{notation.tex}
+\input{preambleSD.tex}
+\begin{document}
+
+
+\begin{Mybox}
+Considere a equação diferencial autônoma
+\begin{equation}\label{EDO}
+X'(t) = F(X(t)), \ \forall t \in I;
+\end{equation}
+onde $X: I \subset \mathbb{R} \to \mathbb{R}^n$ é um campo suave e $F: \mathbb{R}^n \to \mathbb{R}^n$ é suave. Defina $\Phi: I \times \mathbb{R}^n \to \mathbb{R}^n$ da seguinte maneira: para cada $v \in \mathbb{R}^n$, seja $I \ni t \mapsto \Phi(t, v) \doteq \Phi^t(v) \in \mathbb{R}^n$ a única solução da equação diferencial autônoma \cref{EDO} com condição inicial $\Phi^0(v) = v$. Prove que sejam quais forem $s, t \in I$ tais que $s+ t \in I$, vale
+\[
+\Phi^{t+s}(v) = \Phi^t\parent{\Phi^s(v)}, \ \forall v \in \mathbb{R}^n. 
+\] 
+\vspace{-1cm}
+\end{Mybox}
+\vspace{-.5cm}
+\begin{dem}
+Fixe $v \in \mathbb{R}^n$ arbitrariamente e seja $s_0 \in I$ tal que $s_0 + t\in I$ seja qual for $t \in I$. Definamos $\psi, \eta: I \to \mathbb{R}^n$ por
+\[
+\psi(t) \doteq \Phi^{t+s_0}(v), \text{ e } \eta(t) \doteq \Phi^{t}\parent{\Phi^{s_0}(v)}.
+\]
+Por definição, $\eta$ é a única solução do seguinte PVI:
+\[
+\begin{cases}
+X'(t) = F(X(t)), \ \forall t \in I; \\
+X(0) = \Phi^{s_0}\parent{v}.
+\end{cases}
+\]
+Verificaremos agora que $\psi$ também é solução de tal PVI, o que implicará o resultado desejado, a saber, $\psi \equiv \eta$. De fato, evidentemente $\psi(0) = \Phi^{s_0}(v) = \eta(0)$, e, além disso, dado qualquer $t_0 \in I$ tal que $t_0 + s_0 \in I$, temos:
+\begin{align*}
+\left.\frac{\dd \psi}{\dd t} \right\vert_{t = t_0} = \left.\frac{\dd \Phi}{\dd t} \right\vert_{t = t_0 + s_0} = F\parent{\Phi^{t_0 + s_0}(v)} = F(\psi(T)).
+\end{align*}
+\end{dem}
+
+\begin{Mybox}
+Mostrar que $\sigma$ é uma aplicação aberta
+\end{Mybox}
+\vspace{-.5cm}
+\begin{dem}
+\begin{lema}
+Let $f : M \to N$ be a continuous map which admits a local section. Then $f$ is open.
+\end{lema}
+Given any $q \in f(W)$, we'll prove there exists a neighbourhood $U_q$ of $q$ which is contained in $f(W)$, which will guarantee $f(W)$ is open.  \\
+\begin{demm}
+Let $W \subset M$ be an open map. Fix any $q \in f(W)$ and consider a local section $\psi: V_q \to M$.
+\end{demm}
+\end{dem}
+
+\end{document}
+
+
+
