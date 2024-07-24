@@ -1,9 +1,0 @@
-\babel@toc {brazil}{}\relax 
-\thispagestyle {fancy}
-\contentsline {section}{\numberline {1}Preliminares}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Notas de aula e listas}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Resultados auxiliares}{13}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Exercícios de conexidade}{16}{section.2}%
-\contentsline {section}{\numberline {3}Exercícios de compacidade}{21}{section.3}%
-\contentsline {section}{\numberline {4}Resolução da lista 1}{27}{section.4}%
-\contentsline {section}{\numberline {5}Resolução da lista 2}{32}{section.5}%
